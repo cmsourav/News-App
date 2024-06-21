@@ -59,6 +59,19 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    //Splash Api
+    implementation (libs.androidx.core.splashscreen)
+
+    //Compose Foundation
+    implementation (libs.androidx.foundation)
+
+    //coil
+    implementation(libs.coil.compose)
+
+    //Compose Material3
+    implementation(libs.material3)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
