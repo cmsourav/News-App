@@ -2,6 +2,9 @@ package com.example.newsapp.ui.components
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
+import android.util.Log
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -37,7 +40,7 @@ import java.net.URI
 import java.net.URISyntaxException
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
-@SuppressLint("SetJavaScriptEnabled")
+@SuppressLint("SetJavaScriptEnabled", "RememberReturnType")
 @Composable
 fun ScrollableWebview(
     sheetState: SheetState,
@@ -102,20 +105,31 @@ fun ScrollableWebview(
                                 webView.webViewClient =
                                     object : WebViewClient() {
                                         override fun onPageStarted(
-                                            view : WebView?,
-                                            url : String?,
-                                            favicon : Bitmap?,
+                                            view: WebView?,
+                                            url: String?,
+                                            favicon: Bitmap?,
                                         ) {
                                             super.onPageStarted(view, url, favicon)
                                             isLoading = true
                                         }
 
                                         override fun onPageFinished(
-                                            view : WebView?,
-                                            url : String?,
+                                            view: WebView?,
+                                            url: String?,
                                         ) {
                                             super.onPageFinished(view, url)
                                             isLoading = false
+                                        }
+
+                                        override fun onReceivedError(
+                                            view : WebView?,
+                                            request : WebResourceRequest?,
+                                            error : WebResourceError?
+                                        ) {
+                                            super.onReceivedError(view, request, error)
+                                            isLoading = false
+                                            Log.e("sss/", error?.description.toString())
+                                            Log.e("sss//", request?.url.toString())
                                         }
                                     }
                                 webView.settings.useWideViewPort = true
