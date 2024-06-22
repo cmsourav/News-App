@@ -2,7 +2,6 @@ package com.example.newsapp.ui.components
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
-import android.util.Log
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
@@ -128,8 +127,6 @@ fun ScrollableWebview(
                                         ) {
                                             super.onReceivedError(view, request, error)
                                             isLoading = false
-                                            Log.e("sss/", error?.description.toString())
-                                            Log.e("sss//", request?.url.toString())
                                         }
                                     }
                                 webView.settings.useWideViewPort = true
